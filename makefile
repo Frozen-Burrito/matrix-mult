@@ -1,10 +1,10 @@
-all: matrix_mult.exe
+all: matrix_mult
 
-matrix_mult.exe: matrix_mult.o
-	gcc -o matrix_mult.exe matrix_mult.o
+matrix_mult: mm.o
+	gcc -o matrix_mult mm.o
 
-matrix_mult.o: mm.c
+mm.o: mm.c
 	gcc -c mm.c
 
 clean:
-	rm matrix_mult.o matrix_mult.exe
+	rm mm.o matrix_mult
