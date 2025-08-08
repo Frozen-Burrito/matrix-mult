@@ -20,6 +20,8 @@ int main(int argc, char* argv[])
     num_iterations = atoi(argv[2]);
     tile_size = atoi(argv[3]);
 
+    printf("n = %i, tile size = %i\n", n, tile_size);
+
     perform_benchmark(n, num_iterations, tile_size);
 
     return 0;
@@ -28,7 +30,6 @@ int main(int argc, char* argv[])
 void perform_benchmark(int n, int num_iterations, int tile_size)
 {
     struct square_matrix a, b, result, result_aware;
-    int i, j;
     float temp;
 
     // Create and initialize matrices with dummy values.
@@ -38,9 +39,9 @@ void perform_benchmark(int n, int num_iterations, int tile_size)
     square_matrix_create(n, &result_aware);
     
     temp = 1.0f;
-    for (i = 0; i != a.n; ++i)
+    for (int i = 0; i != a.n; ++i)
     {
-        for (j = 0; j != a.n; ++j)
+        for (int j = 0; j != a.n; ++j)
         {
             a.entries[i][j] = temp;
             temp += 1.0f;
@@ -48,9 +49,9 @@ void perform_benchmark(int n, int num_iterations, int tile_size)
     }
 
     temp = 1.0f;
-    for (i = 0; i != b.n; ++i)
+    for (int i = 0; i != b.n; ++i)
     {
-        for (j = 0; j != b.n; ++j)
+        for (int j = 0; j != b.n; ++j)
         {
             b.entries[i][j] = temp;
             temp += 0.8f;
@@ -58,14 +59,14 @@ void perform_benchmark(int n, int num_iterations, int tile_size)
     }
 
     // Benchmark naive implementation.
-    for (i = 0; i != num_iterations; ++i)
+    for (int i = 0; i != num_iterations; ++i)
     {
         zeros(&result);
         naive_multiply(&a, &b, &result);
     }
 
     // Benchmark tiled implementation.
-    for (i = 0; i != num_iterations; ++i)
+    for (int i = 0; i != num_iterations; ++i)
     {
         zeros(&result_aware);
         tiled_multiply(tile_size, &a, &b, &result_aware);
@@ -73,6 +74,7 @@ void perform_benchmark(int n, int num_iterations, int tile_size)
 
     // Display result.
     printf("Done, %i iterations for n = %i\n", num_iterations, n);
+    // Sanity check to verify approaches produce equal results.
     printf("Results match? %s\n", are_matrices_equal(&result, &result_aware) ? "yes" : "no");
 
     square_matrix_delete(&a);

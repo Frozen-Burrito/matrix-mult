@@ -2,3 +2,7 @@ gmon.out
 matrix_mult
 *.o
 out/
+*.out
+*.data
+*.data.old
+.venv/

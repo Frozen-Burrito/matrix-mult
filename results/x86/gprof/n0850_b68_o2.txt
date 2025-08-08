@@ -1,0 +1,7 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 58.34     65.66    65.66      100     0.66     0.66  naive_multiply
+ 41.66    112.54    46.88      100     0.47     0.47  tiled_multiply
