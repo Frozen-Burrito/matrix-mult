@@ -15,6 +15,12 @@ Both implementations are profiled using [gprof](https://ftp.gnu.org/old-gnu/Manu
 
 `results/x86/` contains all `gprof` flat profile output files, as well as simple plots visualizing the results. 
 
+![Plot of square matrix multiplication execution time depending tile size for 500x500 matrix, unoptimized](./results/x86/plot/n500_tile_sizes.png)
+
+![Plot of square matrix multiplication execution time depending on input size, unoptimized](./results/x86/plot/b68_none_matrix_dims.png)
+
+![Plot of square matrix multiplication execution time depending on input size, -O2](./results/x86/plot/b68_o2_matrix_dims.png)
+
 Based on the profiling output:
 
 - The simple tiling approach used resulted in a moderate reduction in execution time, compared to the naïve approach. Tiling and other memory-aware optimizations can have a greater impact, but they require careful consideration of system architecture and memory access patterns.
