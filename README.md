@@ -34,7 +34,54 @@ Based on the results obtained, there are several concerns that could be addresse
 
 ### Get started
 
-TODO
+#### Build
+After cloning the repository into your local environment, you have to build the executable:
+
+**Linux**
+
+To build, simply run `make all`. When done, there will be an executable `out/matrix_mul`.
+
+**Windows MYSYS**
+
+Unless you have make installed, you need to run the following commands in the root directory:
+
+```
+mkdir -p out\obj
+gcc -Iinclude -Wall -g -pg -std=c11 -c src\main.c -o out\obj\main.o
+gcc -Iinclude -Wall -g -pg -std=c11 -c src\matrix.c -o out\obj\matrix.o
+gcc -Llib -pg -no-pie .\out\obj\main.o .\out\obj\matrix.o -o .\out\matrix_mul.exe
+```
+
+Make sure to include the `-no-pie` flag, profiling with `gprof` may not work otherwise. When done, there
+will be an executable `out/matrix_mul.exe`.
+
+#### Running the executable
+
+For simplicity, the executable takes three positional integer arguments:
+
+1. $n$, the square matrix dimensions.
+2. The number of iterations.
+3. The tile size for the tiled approach.
+
+For example, the following command will execute each approach 100 times, multiplying 256x256 matrices, wih 
+a tile size of 32:
+
+```bash
+out/matrix_mult 256 100 32
+```
+
+When execution completes, a `gmon.out` file will be created in the root directory.
+
+#### Generating the flat profile
+
+To generate the flat profile after executing the program, run the following command:
+
+```
+gprof -pnaive_multiply -ptiled_multiply -b out/matrix_mult > matrix_mult_profile.txt
+```
+
+In `matrix_mult_profile.txt`, you will see the measured execution time for both matrix multiplication 
+approaches. The time is usually expressed in seconds or milliseconds.
 
 ### Matrix multiplication
 
