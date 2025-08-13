@@ -4,18 +4,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct square_matrix {
-    float** entries;
-    int n;
-};
+typedef float* matrix_t;
 
-void square_matrix_create(int n, struct square_matrix* const out_matrix);
-void square_matrix_delete(struct square_matrix* a);
+void square_matrix_create(matrix_t *const out_matrix, int n);
+void square_matrix_delete(matrix_t *const matrix);
 
-void zeros(struct square_matrix* const a);
-bool are_matrices_equal(const struct square_matrix* const a, const struct square_matrix* const b);
+void zeros(matrix_t a, int n);
+bool are_matrices_equal(const matrix_t a, const matrix_t b, int n);
 
-void naive_multiply(const struct square_matrix* const a, const struct square_matrix* const b, struct square_matrix* const out_c);
-void tiled_multiply(int tile_size, const struct square_matrix* const a, const struct square_matrix* const b, struct square_matrix* const out_c);
+void naive_multiply(const matrix_t a, const matrix_t b, matrix_t out_c, int n);
+void tiled_multiply(const matrix_t a, const matrix_t b, matrix_t out_c, int n, int tile_size);
 
 #endif /* MATRIX_H */

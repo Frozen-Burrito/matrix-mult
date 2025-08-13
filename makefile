@@ -8,8 +8,8 @@ OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CPPFLAGS := -Iinclude
 # CFLAGS := -Wall -g -pg -std=c11 -ftree-vectorize -fvect-cost-model=very-cheap -msse2 -mfpmath=sse -mtune=generic
-# CFLAGS := -Wall -g -pg -std=c11 -O0
-CFLAGS := -Wall -g -pg -std=c11 -O2
+CFLAGS := -Wall -g -pg -std=c11 -O0
+# CFLAGS := -Wall -g -pg -std=c11 -O2
 LDFLAGS := -Llib -pg
 
 .PHONY: all clean
